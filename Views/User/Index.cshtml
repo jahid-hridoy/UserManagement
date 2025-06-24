@@ -1,0 +1,43 @@
+@model IEnumerable<UserViewModel>
+@{
+    ViewBag.Title = "User List";
+    var selectedRole = ViewBag.SelectedRole as string;
+    var roles = ViewBag.Roles as List<string>;
+}
+
+<h2>User List</h2>
+<form method="get">
+    <select name="role" onchange="this.form.submit()">
+        <option value="">All</option>
+        @foreach (var role in roles)
+        {
+            @if (role == selectedRole)
+            {
+                <option value="@role" selected>@role</option>
+            }
+            else
+            {
+                <option value="@role">@role</option>
+            }
+
+        }
+    </select>
+</form>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Full Name</th>
+        <th>Role</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var user in Model)
+    {
+        <tr>
+            <td>@user.FullName</td>
+            <td>@user.Role</td>
+        </tr>
+    }
+    </tbody>
+</table>

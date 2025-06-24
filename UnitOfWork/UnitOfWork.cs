@@ -5,21 +5,9 @@ using UserManagement.Services;
 
 namespace UserManagement.UnitOfWork;
 
-public class UserService : IUserService
+public class UnitOfWork : IUnitOfWork
 {
-    private readonly IUnitOfWork _unitOfWork;
-    public UserService(IUnitOfWork unitOfWork) => _unitOfWork = unitOfWork;
-
-    public IEnumerable<UserViewModel> GetUsers(string role)
-    {
-        var users = string.IsNullOrEmpty(role)
-            ? _unitOfWork.Users.GetAll()
-            : _unitOfWork.Users.GetByRole(role);
-
-        return users.Select(u => new UserViewModel
-        {
-            FullName = u.FirstName + " " + u.LastName,
-            Role = u.Role
-        });
-    }
+    private readonly UserDbContext _context;
+    public UnitOfWork(UserDbContext context) => _context = context;
+    public IUserRepository Users => new UserRepository(_context);
 }
