@@ -1,9 +1,7 @@
-using UserManagement.Data;
 using UserManagement.Models;
-using UserManagement.Repository;
-using UserManagement.Services;
+using UserManagement.UnitOfWork;
 
-namespace UserManagement.UnitOfWork;
+namespace UserManagement.Services;
 
 public class UserService : IUserService
 {

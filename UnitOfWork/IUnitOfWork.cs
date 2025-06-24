@@ -1,6 +1,8 @@
+using UserManagement.Repository;
+
 namespace UserManagement.UnitOfWork;
 
-public class IUnitOfWork
+public interface IUnitOfWork
 {
-    
+    IUserRepository Users { get; }
 }
