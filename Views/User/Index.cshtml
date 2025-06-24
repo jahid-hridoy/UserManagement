@@ -5,30 +5,32 @@
     var roles = ViewBag.Roles as List<string>;
 }
 
-<h2>User List</h2>
-<form method="get">
-    <select name="role" onchange="this.form.submit()">
-        <option value="">All</option>
-        @foreach (var role in roles)
-        {
-            @if (role == selectedRole)
-            {
-                <option value="@role" selected>@role</option>
-            }
-            else
-            {
-                <option value="@role">@role</option>
-            }
+<h2 class="mb-4 text-primary">User List</h2>
 
-        }
-    </select>
+<form method="get" class="mb-4">
+    <div class="row g-2 align-items-center">
+        <div class="col-auto">
+            <label for="role" class="col-form-label fw-bold">Filter by Role:</label>
+        </div>
+        <div class="col-auto">
+            <select id="role" name="role" class="form-select" onchange="this.form.submit()">
+                <option value="">All</option>
+                @foreach (var role in roles)
+                {
+                    <option value="@role" selected="@(role == selectedRole ? "selected" : null)">
+                        @role
+                    </option>
+                }
+            </select>
+        </div>
+    </div>
 </form>
 
-<table class="table">
-    <thead>
+<table class="table table-bordered table-hover shadow-sm">
+    <thead class="table-light">
     <tr>
-        <th>Full Name</th>
-        <th>Role</th>
+        <th scope="col">Full Name</th>
+        <th scope="col">Role</th>
     </tr>
     </thead>
     <tbody>
